@@ -1,8 +1,10 @@
+// common
 .ft-brand{
   font-size: 1.75rem !important;
   padding: 0 0.5rem 0.5rem 0.5rem !important;
 }
 
+// nav & form
 .ft-navbar{
   margin-bottom: 2rem !important;
 }
@@ -24,6 +26,34 @@
 
 .ft-auth-form{
   width: 30%;
+}
+
+// content
+.search-area{
+  padding-top: 3.5rem;
+}
+
+.no-right-rounded{
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;  
+}
+
+.pr-0{
+  padding-right: 0 !important;
+}
+
+.pl-0{
+  padding-left: 0 !important;
+}
+
+.no-left-rounded{
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.results-block{
+  display: inline-block;
+  margin-top: 1rem;
 }
 
 // footer

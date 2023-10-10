@@ -52,6 +52,8 @@ gem 'devise'
 gem "hirb"
 gem 'devise-i18n'
 gem 'devise-bootstrap-views'
+gem 'iex-ruby-client'
+gem "font-awesome-rails"
 
 # Use bootstrap
 gem 'bootstrap', '~> 5.1.3'
