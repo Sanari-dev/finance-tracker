@@ -1,4 +1,4 @@
-<h1>My portfolio</h1>
+<h1>My Portfolio</h1>
 <div class="search-area">
   <h3>Search stocks</h3>
   <%= form_tag search_stock_path, remote: true, method: :get do %>
@@ -15,3 +15,6 @@
   <% end %>
 </div>
 <%= render 'users/result' %>
+<% if !@tracked_stocks.empty? %>
+  <%= render 'stocks/list' %>
+<% end %>

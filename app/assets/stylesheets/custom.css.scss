@@ -33,6 +33,15 @@
   padding-top: 3.5rem;
 }
 
+.ml-1{
+  margin-left: 1rem;
+}
+
+.center-column{
+  display: flex;
+  justify-content: center;
+}
+
 .no-right-rounded{
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;  
@@ -54,6 +63,11 @@
 .results-block{
   display: inline-block;
   margin-top: 1rem;
+}
+
+// button
+.hor-space{
+  margin: 0 0.5rem 0 0.5rem !important;
 }
 
 // footer

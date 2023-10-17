@@ -3,5 +3,15 @@
     <strong>Symbol: </strong><%= @stock.ticker %>
     <strong>Name: </strong><%= @stock.name %>
     <strong>Price: </strong><%= @stock.last_price %>
+    <% if current_user.can_track_stock?(@stock.ticker) %>
+      <%= link_to 'Add to portofolio', user_stocks_path(user: current_user, ticker: @stock.ticker), class: "btn btn-xs btn-success ml-1", data: {turbo_method: :post} %>
+    <% else %>
+      <% if current_user.stock_already_tracked?(@stock.ticker)  %>
+        <span class="badge bg-success ml-1">Tracked</span>
+      <% end %>
+      <% if !current_user.under_stock_limit?%>
+        <span class="badge bg-warning ml-1">Max limit</span>
+      <% end %>
+    <% end %>
   </div>
 <% end %>

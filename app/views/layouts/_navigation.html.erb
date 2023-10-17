@@ -1,36 +1,39 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ft-navbar">
   <div class="container-fluid">
-    <a class="navbar-brand ft-brand" href="#">Finance Tracker</a>
+    <%= link_to "FinanceTracker", root_path, class: "navbar-brand ft-brand", id: "home" %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%#= is_active = request.path == my_portfolio_path ? "nav-link" : "nav-link active" %>
+            <%= link_to "My Portfolio", my_portfolio_path, class: request.path == my_portfolio_path ? "nav-link active" : "nav-link", id: "my-portfolio" %>
+          </li>
+        <% end %>
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Link
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Link</a>
-        </li>
+        </li>        
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown nav-item-custom nav-dropdown-custom">
+            <a class="nav-link dropdown-toggle nav-item-child-custom" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= current_user.email%>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              <li><%= link_to "Logout", destroy_user_session_path, class: "dropdown-item", data:{ turbo_method: :delete}, id: "logout" %></li>            
+            </ul>            
+          </li>
+        <% end %>
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <button class="btn btn-outline-success hor-space" type="submit">Search</button>
       </form>
+      <% if !user_signed_in? %>
+          <%= link_to "Log in", user_session_path, class: "btn btn-outline-primary hor-space", id: "login" %>
+          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary hor-space", id: "signup" %>
+      <% end %>
     </div>
   </div>
 </nav>
