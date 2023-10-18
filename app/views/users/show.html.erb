@@ -1,0 +1,24 @@
+<h1>User details</h1>
+<div class="col-sm-6">
+  <div class="card card-header results-block">
+    <strong>Email: </strong><%= @user.email %>
+    <strong>First name: </strong><%= @user.first_name %>
+    <strong>Last name: </strong><%= @user.last_name %>
+    <% if current_user.can_track_friend?(current_user.id, @user.id) %>
+      <%= link_to 'Add friend', friendships_path(user: current_user, friend: @user.id), class: "btn btn-sm btn-success ml-1", data: {turbo_method: :post} %>
+    <% else %>
+      <% if current_user.friend_already_tracked?(current_user.id, @user.id)  %>
+        <span class="badge bg-info ml-1">Friend</span>
+      <% end %>
+      <% if !current_user.under_friend_limit?%>
+        <span class="badge bg-warning ml-1">Max limit</span>
+      <% end %>
+    <% end %>
+  </div>
+</div>  
+
+<% if !@tracked_stocks.empty? %>
+  <%= render 'stocks/list' %>
+<% else %>
+  <p class="mt-4">This user is not tracking any stocks</p>
+<% end %>

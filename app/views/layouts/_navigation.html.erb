@@ -8,19 +8,21 @@
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%#= is_active = request.path == my_portfolio_path ? "nav-link" : "nav-link active" %>
             <%= link_to "My Portfolio", my_portfolio_path, class: request.path == my_portfolio_path ? "nav-link active" : "nav-link", id: "my-portfolio" %>
           </li>
-        <% end %>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>        
-        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "My Friends", my_friends_path, class: request.path == my_friends_path ? "nav-link active" : "nav-link", id: "my-friends" %>
+          </li>        
           <li class="nav-item dropdown nav-item-custom nav-dropdown-custom">
             <a class="nav-link dropdown-toggle nav-item-child-custom" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= current_user.email%>
+              <%= fa_icon 'user' %> <%= current_user.full_name%>
             </a>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              <li>
+                <%= link_to edit_user_registration_path, class: "dropdown-item", method: :post, id: "edit" do %> 
+                  <%= fa_icon 'edit' %> Profile
+                <% end %>
+              </li>    
               <li><%= link_to "Logout", destroy_user_session_path, class: "dropdown-item", data:{ turbo_method: :delete}, id: "logout" %></li>            
             </ul>            
           </li>

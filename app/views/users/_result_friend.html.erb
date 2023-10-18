@@ -1,0 +1,22 @@
+<% if @friendlist %>
+  <div class="col-sm-7">
+    <% @friendlist.each do |friend| %>
+      <div class="card card-header results-block">
+        <strong>Email: </strong><%= friend.email %>
+        <strong>First name: </strong><%= friend.first_name %>
+        <strong>Last name: </strong><%= friend.last_name %>
+        <%= link_to 'View', user_path(friend), class: "btn btn-sm btn-primary ml-1"%>
+        <% if current_user.can_track_friend?(current_user.id, friend.id) %>           
+          <%= link_to 'Add friend', friendships_path(user: current_user, friend: friend.id), class: "btn btn-sm btn-success ml-1", data: {turbo_method: :post} %>
+        <% else %>
+          <% if current_user.friend_already_tracked?(current_user.id, friend.id)  %>
+            <span class="badge bg-info ml-1">Friend</span>
+          <% end %>
+          <% if !current_user.under_friend_limit?%>
+            <span class="badge bg-warning ml-1">Max limit</span>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>  
+<% end %>
